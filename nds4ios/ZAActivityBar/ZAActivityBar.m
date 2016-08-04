@@ -187,7 +187,7 @@
 }
 
 - (void) setActionIndicatorCount:(NSUInteger)count {
-    [self.actionIndicatorLabel setText:[NSString stringWithFormat:@"%i", count]];
+    [self.actionIndicatorLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)count]];
     // May want to resize the shape to make a 'pill' shape in the future? Still looks fine for
     // numbers up to 100.
 }

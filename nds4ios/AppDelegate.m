@@ -22,10 +22,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /*
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0f)
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     else
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    */
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"]]];
     
     //Dropbox DBSession Auth
@@ -40,7 +42,7 @@
 		NSData *plistData = [NSData dataWithContentsOfFile:plistPath];
 		NSDictionary *loadedPlist =
         [NSPropertyListSerialization
-         propertyListFromData:plistData mutabilityOption:0 format:NULL errorDescription:NULL];
+         propertyListWithData:plistData options:0 format:NULL error:NULL];
 		NSString *scheme = [[[[loadedPlist objectForKey:@"CFBundleURLTypes"] objectAtIndex:0] objectForKey:@"CFBundleURLSchemes"] objectAtIndex:0];
 		if ([scheme isEqual:@"db-APP_KEY"]) {
 			errorMsg = @"You must set the URL Scheme correctly in nds4ios-Info.plist for Dropbox to work!";
@@ -144,7 +146,7 @@
     [AppDelegate sharedInstance].currentEmulatorViewController = emulatorViewController;
     SASlideMenuRootViewController *rootViewController = (SASlideMenuRootViewController*)[UIApplication sharedApplication].keyWindow.rootViewController;
     [rootViewController doSlideIn:nil];
-    [rootViewController presentModalViewController:emulatorViewController animated:YES];
+    [rootViewController presentViewController:emulatorViewController animated:YES completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

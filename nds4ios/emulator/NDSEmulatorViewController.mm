@@ -176,7 +176,7 @@ const float textureVert[] =
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    EMU_setFrameSkip([defaults integerForKey:@"frameSkip"]);
+    EMU_setFrameSkip((int)[defaults integerForKey:@"frameSkip"]);
     EMU_enableSound(![defaults boolForKey:@"disableSound"]);
     
     self.directionalControl.style = [defaults integerForKey:@"controlPadStyle"];
@@ -610,7 +610,7 @@ FOUNDATION_EXTERN void AudioServicesPlaySystemSoundWithVibration(unsigned long, 
 
 - (IBAction)hideEmulator:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)doSaveState:(UILongPressGestureRecognizer*)sender
@@ -647,7 +647,7 @@ FOUNDATION_EXTERN void AudioServicesPlaySystemSoundWithVibration(unsigned long, 
         // save
         NSString *saveStateName = [alertView textFieldAtIndex:0].text;
         [self saveStateWithName:saveStateName];
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
